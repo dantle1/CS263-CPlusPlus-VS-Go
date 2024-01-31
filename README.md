@@ -1,1 +1,1 @@
-# CS263-RustVsGo
+# CS263-C++ VS Go
