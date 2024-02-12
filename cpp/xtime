@@ -1,11 +1,2 @@
 #!/bin/sh
-
-output=$(/usr/bin/time -l "$@" 2>&1)
-
-real=$(echo "$output" | awk '/real/ {print $1}')
-user=$(echo "$output" | awk '/user/ {print $3}')
-sys=$(echo "$output" | awk '/sys/ {print $5}')
-size_in_bytes=$(echo "$output" | awk '/maximum resident set size/ {print $1}')
-size_in_kb=$(($size_in_bytes / 1000))
-
-printf "%s stats:\n%s sec (user)\n%s sec (sys)\n%s sec (real)\n%s kB (peak memory footprint)\n" "$@" "$user" "$sys" "$real" "$size_in_kb"
+/usr/bin/time -f '%Uu %Ss %er %MkB %C' "$@"
