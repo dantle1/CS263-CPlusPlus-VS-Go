@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.22.2)
 project(263 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 
+set(CMAKE_BUILD_TYPE RelWithDebInfo)
+
 # havlakcc 
 set(HAVLAK_SOURCES
     havlak/LoopTesterApp.cc
