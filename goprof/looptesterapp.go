@@ -20,10 +20,13 @@
 //
 package main
 
-import "fmt"
-import "./basicblock"
-import "./lsg"
-import "./havlakloopfinder"
+import (
+	"fmt"
+	"goprof/cfg"
+	"goprof/lsg"
+	"goprof/havlakloopfinder"
+)
+
 
 //======================================================
 // Testing Code

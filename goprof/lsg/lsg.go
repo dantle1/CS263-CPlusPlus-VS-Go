@@ -20,7 +20,7 @@ package lsg
 
 import "container/list"
 import "fmt"
-import "./basicblock"
+import "goprof/cfg"
 
 //======================================================
 // Scaffold Code
