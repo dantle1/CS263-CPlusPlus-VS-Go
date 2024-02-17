@@ -11,7 +11,8 @@ set(HAVLAK_SOURCES
     havlak/mao-loops.cc
 )
 set(LPROFILER
-    /usr/lib/aarch64-linux-gnu/libprofiler.so.0
+    # /usr/lib/aarch64-linux-gnu/libprofiler.so.0
+    /usr/lib/aarch64-linux-gnu/libtcmalloc_and_profiler.so.4
 )
 add_executable(havlakcc ${HAVLAK_SOURCES})
 # So that libprofiler is actually linked if not invoked
