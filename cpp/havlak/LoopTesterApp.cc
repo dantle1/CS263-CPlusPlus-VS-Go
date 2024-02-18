@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
     sum += FindHavlakLoops(&cfg, &lsg);
   }
   fprintf(stderr,
-          "Found %d loops "
+          "# of loops: %d "
           "(total %d)\n", num_loops, sum);
   lsg.Dump();
 }
