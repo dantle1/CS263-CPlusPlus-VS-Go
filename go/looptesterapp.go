@@ -20,7 +20,11 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log"
+	"os"
+	"runtime/pprof"
 
 	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/havlakloopfinder"
 )
@@ -64,7 +68,21 @@ func buildBaseLoop(cfgraph *havlakloopfinder.CFG, from int) int {
 	return footer
 }
 
+var memprofile = flag.String("memprofile", "", "write memory profile to this file")
+var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to this file")
+
 func main() {
+	/* This section starts a CPU profile and 'defer's the execution of Stop until
+	main exits */
+	flag.Parse()
+	if *cpuprofile != "" {
+		f, err := os.Create(*cpuprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pprof.StartCPUProfile(f)
+		defer pprof.StopCPUProfile()
+	}
 
 	lsgraph := havlakloopfinder.NewLSG()
 	cfgraph := havlakloopfinder.NewCFG()
@@ -99,6 +117,17 @@ func main() {
 	}
 
 	havlakloopfinder.FindHavlakLoops(cfgraph, lsgraph)
+
+	/* This section starts a heap profile and stops after one iteration
+	of loop finding */
+	if *memprofile != "" {
+		f, err := os.Create(*memprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pprof.WriteHeapProfile(f)
+		defer pprof.StopCPUProfile()
+	}
 
 	for i := 0; i < 50; i++ {
 		havlakloopfinder.FindHavlakLoops(cfgraph, havlakloopfinder.NewLSG())
