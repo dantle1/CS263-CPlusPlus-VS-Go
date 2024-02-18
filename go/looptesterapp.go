@@ -65,24 +65,19 @@ func buildBaseLoop(cfgraph *havlakloopfinder.CFG, from int) int {
 }
 
 func main() {
-	fmt.Printf("Welcome to LoopTesterApp, Go edition\n")
 
 	lsgraph := havlakloopfinder.NewLSG()
 	cfgraph := havlakloopfinder.NewCFG()
-
-	fmt.Printf("Constructing Simple CFG...\n")
 
 	cfgraph.CreateNode(0) // top
 	buildBaseLoop(cfgraph, 0)
 	cfgraph.CreateNode(1) // bottom
 	havlakloopfinder.NewBasicBlockEdge(cfgraph, 0, 2)
 
-	fmt.Printf("15000 dummy loops\n")
 	for dummyloop := 0; dummyloop < 15000; dummyloop++ {
 		havlakloopfinder.FindHavlakLoops(cfgraph, havlakloopfinder.NewLSG())
 	}
 
-	fmt.Printf("Constructing CFG...\n")
 	n := 2
 
 	for parlooptrees := 0; parlooptrees < 10; parlooptrees++ {
@@ -103,16 +98,12 @@ func main() {
 		buildConnect(cfgraph, n, 1)
 	}
 
-	fmt.Printf("Performing Loop Recognition\n1 Iteration\n")
 	havlakloopfinder.FindHavlakLoops(cfgraph, lsgraph)
 
-	fmt.Printf("Another 50 iterations...\n")
 	for i := 0; i < 50; i++ {
-		fmt.Printf(".")
 		havlakloopfinder.FindHavlakLoops(cfgraph, havlakloopfinder.NewLSG())
 	}
 
-	fmt.Printf("\n")
 	fmt.Printf("# of loops: %d (including 1 artificial root node)\n", lsgraph.NumLoops())
 	lsgraph.CalculateNestingLevel()
 }
