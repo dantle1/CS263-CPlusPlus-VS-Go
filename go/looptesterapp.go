@@ -21,37 +21,36 @@ package main
 
 import (
 	"fmt"
-	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/basicblock"
+
 	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/havlakloopfinder"
-	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/lsg"
 )
 
 //======================================================
 // Testing Code
 //======================================================
 
-func buildDiamond(cfgraph *cfg.CFG, start int) int {
+func buildDiamond(cfgraph *havlakloopfinder.CFG, start int) int {
 	bb0 := start
-	cfg.NewBasicBlockEdge(cfgraph, bb0, bb0+1)
-	cfg.NewBasicBlockEdge(cfgraph, bb0, bb0+2)
-	cfg.NewBasicBlockEdge(cfgraph, bb0+1, bb0+3)
-	cfg.NewBasicBlockEdge(cfgraph, bb0+2, bb0+3)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, bb0, bb0+1)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, bb0, bb0+2)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, bb0+1, bb0+3)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, bb0+2, bb0+3)
 
 	return bb0 + 3
 }
 
-func buildConnect(cfgraph *cfg.CFG, start int, end int) {
-	cfg.NewBasicBlockEdge(cfgraph, start, end)
+func buildConnect(cfgraph *havlakloopfinder.CFG, start int, end int) {
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, start, end)
 }
 
-func buildStraight(cfgraph *cfg.CFG, start int, n int) int {
+func buildStraight(cfgraph *havlakloopfinder.CFG, start int, n int) int {
 	for i := 0; i < n; i++ {
 		buildConnect(cfgraph, start+i, start+i+1)
 	}
 	return start + n
 }
 
-func buildBaseLoop(cfgraph *cfg.CFG, from int) int {
+func buildBaseLoop(cfgraph *havlakloopfinder.CFG, from int) int {
 	header := buildStraight(cfgraph, from, 1)
 	diamond1 := buildDiamond(cfgraph, header)
 	d11 := buildStraight(cfgraph, diamond1, 1)
@@ -68,19 +67,19 @@ func buildBaseLoop(cfgraph *cfg.CFG, from int) int {
 func main() {
 	fmt.Printf("Welcome to LoopTesterApp, Go edition\n")
 
-	lsgraph := lsg.NewLSG()
-	cfgraph := cfg.NewCFG()
+	lsgraph := havlakloopfinder.NewLSG()
+	cfgraph := havlakloopfinder.NewCFG()
 
 	fmt.Printf("Constructing Simple CFG...\n")
 
 	cfgraph.CreateNode(0) // top
 	buildBaseLoop(cfgraph, 0)
 	cfgraph.CreateNode(1) // bottom
-	cfg.NewBasicBlockEdge(cfgraph, 0, 2)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, 0, 2)
 
 	fmt.Printf("15000 dummy loops\n")
 	for dummyloop := 0; dummyloop < 15000; dummyloop++ {
-		havlakloopfinder.FindHavlakLoops(cfgraph, lsg.NewLSG())
+		havlakloopfinder.FindHavlakLoops(cfgraph, havlakloopfinder.NewLSG())
 	}
 
 	fmt.Printf("Constructing CFG...\n")
@@ -110,7 +109,7 @@ func main() {
 	fmt.Printf("Another 50 iterations...\n")
 	for i := 0; i < 50; i++ {
 		fmt.Printf(".")
-		havlakloopfinder.FindHavlakLoops(cfgraph, lsg.NewLSG())
+		havlakloopfinder.FindHavlakLoops(cfgraph, havlakloopfinder.NewLSG())
 	}
 
 	fmt.Printf("\n")
