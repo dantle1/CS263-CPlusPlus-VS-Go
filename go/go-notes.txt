@@ -1,0 +1,6 @@
+Six main points about GO
+1. Statically Typed Language (cant change type of variable without casting)
+2. Strongly Typed Language (cant add 2 variables of different types)
+3. GO is compiled (creates a binary file before compiling)
+4. Fast Compile Time
+5. Built in Concurrency
