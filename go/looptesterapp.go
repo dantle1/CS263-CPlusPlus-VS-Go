@@ -17,40 +17,44 @@
 // This program constructs a fairly large control flow
 // graph and performs loop recognition. This is the Go
 // version.
-//
 package main
 
-import "fmt"
-import "./basicblock"
-import "./lsg"
-import "./havlakloopfinder"
+import (
+	"flag"
+	"fmt"
+	"log"
+	"os"
+	"runtime/pprof"
+
+	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/havlakloopfinder"
+)
 
 //======================================================
 // Testing Code
 //======================================================
 
-func buildDiamond(cfgraph *cfg.CFG, start int) int {
+func buildDiamond(cfgraph *havlakloopfinder.CFG, start int) int {
 	bb0 := start
-	cfg.NewBasicBlockEdge(cfgraph, bb0, bb0+1)
-	cfg.NewBasicBlockEdge(cfgraph, bb0, bb0+2)
-	cfg.NewBasicBlockEdge(cfgraph, bb0+1, bb0+3)
-	cfg.NewBasicBlockEdge(cfgraph, bb0+2, bb0+3)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, bb0, bb0+1)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, bb0, bb0+2)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, bb0+1, bb0+3)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, bb0+2, bb0+3)
 
 	return bb0 + 3
 }
 
-func buildConnect(cfgraph *cfg.CFG, start int, end int) {
-	cfg.NewBasicBlockEdge(cfgraph, start, end)
+func buildConnect(cfgraph *havlakloopfinder.CFG, start int, end int) {
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, start, end)
 }
 
-func buildStraight(cfgraph *cfg.CFG, start int, n int) int {
+func buildStraight(cfgraph *havlakloopfinder.CFG, start int, n int) int {
 	for i := 0; i < n; i++ {
 		buildConnect(cfgraph, start+i, start+i+1)
 	}
 	return start + n
 }
 
-func buildBaseLoop(cfgraph *cfg.CFG, from int) int {
+func buildBaseLoop(cfgraph *havlakloopfinder.CFG, from int) int {
 	header := buildStraight(cfgraph, from, 1)
 	diamond1 := buildDiamond(cfgraph, header)
 	d11 := buildStraight(cfgraph, diamond1, 1)
@@ -64,25 +68,34 @@ func buildBaseLoop(cfgraph *cfg.CFG, from int) int {
 	return footer
 }
 
+var memprofile = flag.String("memprofile", "", "write memory profile to this file")
+var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to this file")
+
 func main() {
-	fmt.Printf("Welcome to LoopTesterApp, Go edition\n")
+	/* This section starts a CPU profile and 'defer's the execution of Stop until
+	main exits */
+	flag.Parse()
+	if *cpuprofile != "" {
+		f, err := os.Create(*cpuprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pprof.StartCPUProfile(f)
+		defer pprof.StopCPUProfile()
+	}
 
-	lsgraph := lsg.NewLSG()
-	cfgraph := cfg.NewCFG()
-
-	fmt.Printf("Constructing Simple CFG...\n")
+	lsgraph := havlakloopfinder.NewLSG()
+	cfgraph := havlakloopfinder.NewCFG()
 
 	cfgraph.CreateNode(0) // top
 	buildBaseLoop(cfgraph, 0)
 	cfgraph.CreateNode(1) // bottom
-	cfg.NewBasicBlockEdge(cfgraph, 0, 2)
+	havlakloopfinder.NewBasicBlockEdge(cfgraph, 0, 2)
 
-	fmt.Printf("15000 dummy loops\n")
 	for dummyloop := 0; dummyloop < 15000; dummyloop++ {
-		havlakloopfinder.FindHavlakLoops(cfgraph, lsg.NewLSG())
+		havlakloopfinder.FindHavlakLoops(cfgraph, havlakloopfinder.NewLSG())
 	}
 
-	fmt.Printf("Constructing CFG...\n")
 	n := 2
 
 	for parlooptrees := 0; parlooptrees < 10; parlooptrees++ {
@@ -103,16 +116,23 @@ func main() {
 		buildConnect(cfgraph, n, 1)
 	}
 
-	fmt.Printf("Performing Loop Recognition\n1 Iteration\n")
 	havlakloopfinder.FindHavlakLoops(cfgraph, lsgraph)
 
-	fmt.Printf("Another 50 iterations...\n")
-	for i := 0; i < 50; i++ {
-		fmt.Printf(".")
-		havlakloopfinder.FindHavlakLoops(cfgraph, lsg.NewLSG())
+	/* This section starts a heap profile and stops after one iteration
+	of loop finding */
+	if *memprofile != "" {
+		f, err := os.Create(*memprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pprof.WriteHeapProfile(f)
+		defer pprof.StopCPUProfile()
 	}
 
-	fmt.Printf("\n")
+	for i := 0; i < 50; i++ {
+		havlakloopfinder.FindHavlakLoops(cfgraph, havlakloopfinder.NewLSG())
+	}
+
 	fmt.Printf("# of loops: %d (including 1 artificial root node)\n", lsgraph.NumLoops())
 	lsgraph.CalculateNestingLevel()
 }

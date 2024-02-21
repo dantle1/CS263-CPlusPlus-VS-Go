@@ -1,3 +1,3 @@
-module go
+module github.com/dantle1/CS263-CPlusPlus-VS-Go/go
 
-go 1.21.6
+go 1.19
