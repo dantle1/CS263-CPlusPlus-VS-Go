@@ -18,3 +18,5 @@ Makefile
 
 *.out
 *.exe
+*.in 
+*.exp 
