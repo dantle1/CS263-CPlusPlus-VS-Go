@@ -9,7 +9,11 @@ As mentioned, our experiments were run inside of a Docker container. As Docker n
 You will need to install `cmake` and `build-essential`, as well as `google-perftools`. In addition, you will need to install `go` and `go install github.com/google/pprof@latest`, adding `export PATH="$HOME/go/bin:$PATH"` (adding `go` binaries to `PATH`).
 
 ### Profiling Algorithms
-1. Depth First Search
+1. Depth First Search (Traverse through a tree)
+2. Dijkstra (Find the shortest path in a graph)
+3. Merge Sort
+4. Quick Sort (Pick first element as pivot)  
+5. Kruskal (Find MST of a graph)
 
 #### CPU Profiling
 More to come!
