@@ -25,5 +25,5 @@ target_link_options(havlakcc PRIVATE -Wl,--no-as-needed ${LPROFILER} -Wl,--as-ne
 set(REVCMP_SOURCES
     reverse-complement/reverse-complement.cc
 )
-add_executable(revcmp ${REVCMP_SOURCES})
-target_link_options(revcmp PRIVATE -Wl,--no-as-needed ${LPROFILER} -Wl,--as-needed)
+add_executable(revcmpcc ${REVCMP_SOURCES})
+target_link_options(revcmpcc PRIVATE -Wl,--no-as-needed ${LPROFILER} -Wl,--as-needed)
