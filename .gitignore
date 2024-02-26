@@ -16,7 +16,12 @@ cpp/Makefile
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Profiling
 *.out
 *.exe
 *.in 
 *.exp 
+prof/
+
+#Binaries
+bin/
