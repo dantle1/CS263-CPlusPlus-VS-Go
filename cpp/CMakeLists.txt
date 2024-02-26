@@ -27,3 +27,16 @@ set(REVCMP_SOURCES
 )
 add_executable(revcmpcc ${REVCMP_SOURCES})
 target_link_options(revcmpcc PRIVATE -Wl,--no-as-needed ${LPROFILER} -Wl,--as-needed)
+
+# For three coloring DEBUG (sample solution)
+set(THREECOLORDEBUG_SOURCES
+    three-coloring/three-coloring-debug.cc
+)
+add_executable(threecolor_debug ${THREECOLORDEBUG_SOURCES})
+
+# For three coloring (my implementation)
+set(THREECOLOR_SOURCES 
+    three-coloring/three-coloring.cc
+)
+add_executable(threecolorcc ${THREECOLOR_SOURCES})
+target_link_options(threecolorcc PRIVATE -Wl,--no-as-needed ${LPROFILER} -Wl,--as-needed)
