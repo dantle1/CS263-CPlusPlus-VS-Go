@@ -170,7 +170,7 @@ class HavlakLoopFinder {
   //
   int DFS(BasicBlock      *current_node,
           NodeVector      *nodes,
-          std::vector<int>*number,
+          int             **number,
           IntVector       *last,
           const int       current) {
     (*nodes)[current].Init(current_node, current);
@@ -207,7 +207,7 @@ class HavlakLoopFinder {
     CharVector         type(size);
     IntVector          last(size);
     NodeVector         nodes(size);
-    std::vector<int>   number(size);
+    int                *number = new int[size];
 
     // Step a:
     //   - initialize all nodes as unvisited.
@@ -387,6 +387,8 @@ class HavlakLoopFinder {
         lsg_->AddLoop(loop);
       }  // node_pool.size
     }  // Step c
+
+    delete[] number;
   }  // FindLoops
 
  private:

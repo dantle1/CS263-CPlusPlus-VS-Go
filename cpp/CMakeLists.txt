@@ -35,7 +35,7 @@ set(HAVLAK1_SOURCES
 add_executable(havlakcc1 ${HAVLAK1_SOURCES})
 cpuprofile(havlakcc1)
 
-# Optimized by...
+# Optimized by changing BasicBlockMap to a vector...we get 2X speedup!!
 set(HAVLAK2_SOURCES
     havlak2/LoopTesterApp.cc
     havlak2/mao-loops.h
@@ -43,6 +43,15 @@ set(HAVLAK2_SOURCES
 )
 add_executable(havlakcc2 ${HAVLAK2_SOURCES})
 cpuprofile(havlakcc2)
+
+# Optimized by changing BasicBlockMap to an int array...similar speedup to a vector
+set(HAVLAK2.5_SOURCES
+    havlak2.5/LoopTesterApp.cc
+    havlak2.5/mao-loops.h
+    havlak2.5/mao-loops.cc
+)
+add_executable(havlakcc2.5 ${HAVLAK2.5_SOURCES})
+cpuprofile(havlakcc2.5)
 
 # For reverse complement from 
 # https://benchmarksgame-team.pages.debian.net/benchmarksgame/program/revcomp-gpp-1.html
