@@ -21,6 +21,8 @@
 
 #include "mao-loops.h"
 
+#include <gperftools/heap-profiler.h>
+
 int buildDiamond(MaoCFG *cfg, int start) {
   int bb0 = start;
 

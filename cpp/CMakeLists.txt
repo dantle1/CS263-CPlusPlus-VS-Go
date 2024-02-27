@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.22.2)
 project(263 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 
+set(GPERFTOOLS_INCLUDE_DIR "/usr/include/gperftools")
+include_directories(${GPERFTOOLS_INCLUDE_DIR})
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(PROF_DIRECTORY ${CMAKE_BINARY_DIR}/prof)
@@ -13,12 +16,8 @@ add_custom_target(clean-prof
 
 set(CMAKE_BUILD_TYPE RelWithDebInfo)
 
-set(LPROFILER
-    /usr/lib/aarch64-linux-gnu/libtcmalloc_and_profiler.so.4
-)
-
 function(cpuprofile PROGRAM_NAME)
-    target_link_options(${PROGRAM_NAME} PRIVATE -Wl,--no-as-needed ${LPROFILER} -Wl,--as-needed)
+    target_link_libraries(${PROGRAM_NAME} tcmalloc_and_profiler)
     add_custom_target(${PROGRAM_NAME}.cprof
         COMMAND CPUPROFILE=${PROF_DIRECTORY}/${PROGRAM_NAME}.cprof ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROGRAM_NAME}
         DEPENDS ${PROGRAM_NAME}
