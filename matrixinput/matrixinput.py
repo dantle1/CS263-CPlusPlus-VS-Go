@@ -19,9 +19,9 @@ def main():
     p = int(sys.stdin.readline())
     file2.write(str(p) + "\n")
     # first matrix: m x n
-    matrix1 = np.random.randint(100, size=(m,n))
+    matrix1 = np.random.randint(10, size=(m,n))
     # second matrix: n x p
-    matrix2 = np.random.randint(100, size=(n,p))
+    matrix2 = np.random.randint(10, size=(n,p))
     np.savetxt(file1, matrix1, fmt='%d')
     np.savetxt(file2, matrix2, fmt='%d')
     file1.close()
