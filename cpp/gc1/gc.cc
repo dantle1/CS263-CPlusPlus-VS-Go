@@ -118,6 +118,10 @@ int main(int argc, char* argv[]) {
     }
 
     input.close();
+
+    for (Object *obj : heap) {
+        delete obj;
+    }
     return 0;
 }
 
