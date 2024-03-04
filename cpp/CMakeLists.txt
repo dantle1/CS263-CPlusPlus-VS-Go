@@ -19,6 +19,7 @@ set(CMAKE_BUILD_TYPE RelWithDebInfo)
 function(cpuprofile PROGRAM_NAME)
     target_link_libraries(${PROGRAM_NAME} tcmalloc_and_profiler)
     add_custom_target(${PROGRAM_NAME}.cprof
+        COMMAND mkdir -p ${PROF_DIRECTORY}
         COMMAND CPUPROFILE=${PROF_DIRECTORY}/${PROGRAM_NAME}.cprof ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROGRAM_NAME}
         DEPENDS ${PROGRAM_NAME}
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -73,3 +74,17 @@ set(THREECOLOR_SOURCES
 )
 add_executable(threecolorcc ${THREECOLOR_SOURCES})
 cpuprofile(threecolorcc)
+
+# For tricolor Garbage collector algorithm
+set(GC1_SOURCES
+    gc1/gc.cc
+)
+add_executable(gccc1 ${GC1_SOURCES})
+cpuprofile(gccc1)
+
+# multithreaded
+set(GC2_SOURCES
+    gc2/gc.cc
+)
+add_executable(gccc2 ${GC2_SOURCES})
+cpuprofile(gccc2)

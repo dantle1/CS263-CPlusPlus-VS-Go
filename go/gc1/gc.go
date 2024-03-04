@@ -37,8 +37,7 @@ var (
 	memprofile  = flag.String("memprofile", "", "write memory profile to this file")
 	cpuprofile  = flag.String("cpuprofile", "", "write cpu profile to this file")
 	heapprop    = flag.Float64("heapprop", 0.85, "Proportion of heap capacity allocated")
-	numcycles   = flag.Int("numcycles", 1000000, "Number of Garbage collection cycles")
-	rootsetsize = flag.Int("rootsetsize", 200, "Number of variables in the root set")
+	numcycles   = flag.Int("numcycles", 10000000, "Number of Garbage collection cycles")
 	infile      = flag.String("infile", "../python/reg-graph-data/big-graph.txt", "Graph to model heap structure")
 	heap        []*Object // Global heap
 	rootSet     []int     // Global root set of objects (program variables)
@@ -79,10 +78,10 @@ func mark(i int) {
 	obj.Marked = gray
 
 	// Recursively mark its references.
-	if heap[obj.Left].Marked != gray {
+	if obj.Left != -1 && heap[obj.Left].Marked != gray {
 		mark(obj.Left)
 	}
-	if heap[obj.Right].Marked != gray {
+	if obj.Right != -1 && heap[obj.Right].Marked != gray {
 		mark(obj.Right)
 	}
 
@@ -103,7 +102,7 @@ func Mark() {
 func sweep() {
 	for i := range heap {
 		obj := heap[i]
-		if obj != nil && obj.Marked == white {
+		if obj.Marked == white {
 			// Free the object
 			heap[i].Present = false
 		}
@@ -156,9 +155,11 @@ func main() {
 		}
 	}
 
+	rootsetsize := int(float64(n) / 5.)
+
 	// Set the roots evenly between 0,...,n - 1
-	interval := n / *rootsetsize
-	for i := 0; i < *rootsetsize; i++ {
+	interval := n / rootsetsize
+	for i := 0; i < rootsetsize; i++ {
 		rootSet = append(rootSet, interval*i)
 	}
 
