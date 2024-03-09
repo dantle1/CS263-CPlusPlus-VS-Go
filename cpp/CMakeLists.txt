@@ -82,9 +82,16 @@ set(GC1_SOURCES
 add_executable(gccc1 ${GC1_SOURCES})
 cpuprofile(gccc1)
 
-# multithreaded
-set(GC2_SOURCES
-    gc2/gc.cc
+# For iterative matrix multiplication
+set (ITMAT1_SOURCES
+    itmat1/itmat1.cc
 )
-add_executable(gccc2 ${GC2_SOURCES})
-cpuprofile(gccc2)
+add_executable(itmat1 ${ITMAT1_SOURCES})
+cpuprofile(itmat1)
+
+# For recursibe matrix multiplication 
+set (RECMAT1_SOURCES
+    recmat1/recmat1.cc
+)
+add_executable(recmat1 ${RECMAT1_SOURCES})
+cpuprofile(recmat1)

@@ -43,7 +43,7 @@ itmat1:
 	cd itmat1 && $(GO) build -o ../bin/itmat1 
 
 recmat1:
-	cd recmat1 && $(GO) build -o ../bin/recmat1 
+	cd recmat1 && $(GO) build -gcflags="-N -l" -o ../bin/recmat1 
 
 %.cprof: 
 	$(MAKE) $*

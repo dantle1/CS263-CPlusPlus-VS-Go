@@ -15,17 +15,16 @@ var (
 	memprofile = flag.String("memprofile", "", "write memory profile to this file")
 	cpuprofile = flag.String("cpuprofile", "", "write cpu profile to this file")
 	infile     = flag.String("infile", "../data/matrix/matrix.in", "Matrices to multiply")
-	SIZE       int
 )
 
 // Function to add two matrices
-func add(mat1, mat2 [][]float64) [][]float64 {
+func add(mat1 [][]float64, mat2 [][]float64) [][]float64 {
 	rows := len(mat1)
 	cols := len(mat1[0])
 	result := make([][]float64, rows)
-	for i := range result {
+	for i := 0; i < rows; i++ {
 		result[i] = make([]float64, cols)
-		for j := range result[i] {
+		for j := 0; j < cols; j++ {
 			result[i][j] = mat1[i][j] + mat2[i][j]
 		}
 	}
@@ -33,13 +32,13 @@ func add(mat1, mat2 [][]float64) [][]float64 {
 }
 
 // Function to subtract two matrices
-func sub(mat1, mat2 [][]float64) [][]float64 {
+func sub(mat1 [][]float64, mat2 [][]float64) [][]float64 {
 	rows := len(mat1)
 	cols := len(mat1[0])
 	result := make([][]float64, rows)
-	for i := range result {
+	for i := 0; i < rows; i++ {
 		result[i] = make([]float64, cols)
-		for j := range result[i] {
+		for j := 0; j < cols; j++ {
 			result[i][j] = mat1[i][j] - mat2[i][j]
 		}
 	}
@@ -127,6 +126,7 @@ func multiplyMatrices(mat1, mat2 [][]float64) [][]float64 {
 	result := make([][]float64, rows1)
 	for i := 0; i < newRows; i++ {
 		result[i] = make([]float64, cols2)
+		result[i+newRows] = make([]float64, cols2)
 		for j := 0; j < newCols; j++ {
 			result[i][j] = C11[i][j]
 			result[i][j+newCols] = C12[i][j]
