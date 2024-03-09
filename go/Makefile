@@ -5,7 +5,7 @@ PROF=./prof
 # GO=go1.18
 GO=go1.22.0
 
-PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2
+PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1
 
 all: $(PROG)
 
@@ -38,6 +38,13 @@ gcgo1:
 gcgo2:
 	cd gc2 && $(GO) build -o ../bin/gcgo2
 
+# Recursive and iterative matrix multiplication 
+itmat1:
+	cd itmat1 && $(GO) build -o ../bin/itmat1 
+
+recmat1:
+	cd recmat1 && $(GO) build -gcflags="-N -l" -o ../bin/recmat1 
+
 %.cprof: 
 	$(MAKE) $*
 	$(BIN)/$* -cpuprofile=$(PROF)/$@
@@ -66,4 +73,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo clean
+.PHONY: all havlakgo revcmpgo itmat1 recmat1 clean
