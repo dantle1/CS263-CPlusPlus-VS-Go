@@ -20,7 +20,7 @@ struct Object {
 
 int numcycles = 10000000;
 float heapprop = 0.85;
-std::string infile = "../python/reg-graph-data/big-graph.txt";
+std::string infile = "../data/graph/graph.in";
 std::vector<Object*> heap;
 std::vector<int> rootSet;
 

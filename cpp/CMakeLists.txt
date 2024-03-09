@@ -82,8 +82,16 @@ set(GC1_SOURCES
 add_executable(gccc1 ${GC1_SOURCES})
 cpuprofile(gccc1)
 
-# matrix multiplication using native iterative algorithm
-set(MATRIXMULT_SOURCES
-    matrixmult/iterativematrix1.cc)
-add_executable(iterativematrix1 ${MATRIXMULT_SOURCES})
-cpuprofile(iterativematrix1)
+# For iterative matrix multiplication
+set (ITMAT1_SOURCES
+    itmat1/itmat1.cc
+)
+add_executable(itmat1 ${ITMAT1_SOURCES})
+cpuprofile(itmat1)
+
+# For recursibe matrix multiplication 
+set (RECMAT1_SOURCES
+    recmat1/recmat1.cc
+)
+add_executable(recmat1 ${RECMAT1_SOURCES})
+cpuprofile(recmat1)

@@ -38,9 +38,9 @@ var (
 	memprofile  = flag.String("memprofile", "", "write memory profile to this file")
 	cpuprofile  = flag.String("cpuprofile", "", "write cpu profile to this file")
 	heapprop    = flag.Float64("heapprop", 0.85, "Proportion of heap capacity allocated")
-	numcycles   = flag.Int("numcycles", 1000000, "Number of Garbage collection cycles")
+	numcycles   = flag.Int("numcycles", 100, "Number of Garbage collection cycles")
 	rootsetsize = flag.Int("rootsetsize", 200, "Number of variables in the root set")
-	infile      = flag.String("infile", "../python/reg-graph-data/big-graph.txt", "Graph to model heap structure")
+	infile      = flag.String("infile", "../data/graph/graph.in", "Graph to model heap structure")
 	heap        []*Object // Global heap
 	rootSet     []int     // Global root set of objects (program variables)
 	mu          sync.Mutex
@@ -185,7 +185,7 @@ func main() {
 	for i := 0; i < *numcycles; i++ {
 		gcCycle()
 		// fmt.Printf("After GC cycle %d:\n", i+1)
-		// printObjectStatus()
+		printObjectStatus()
 	}
 }
 
