@@ -82,9 +82,8 @@ set(GC1_SOURCES
 add_executable(gccc1 ${GC1_SOURCES})
 cpuprofile(gccc1)
 
-# multithreaded
-set(GC2_SOURCES
-    gc2/gc.cc
-)
-add_executable(gccc2 ${GC2_SOURCES})
-cpuprofile(gccc2)
+# matrix multiplication using native iterative algorithm
+set(MATRIXMULT_SOURCES
+    matrixmult/iterativematrix1.cc)
+add_executable(iterativematrix1 ${MATRIXMULT_SOURCES})
+cpuprofile(iterativematrix1)

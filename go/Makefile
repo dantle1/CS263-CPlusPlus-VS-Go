@@ -1,11 +1,11 @@
 BIN=./bin
 PROF=./prof
 # This is how we change the Go compiler we are using
-# GO=go # 1.19
+GO=go # 1.19
 # GO=go1.18
-GO=go1.22.0
+#GO=go1.22.0
 
-PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2
+PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 iterativematrix1
 
 all: $(PROG)
 
@@ -38,6 +38,10 @@ gcgo1:
 gcgo2:
 	cd gc2 && $(GO) build -o ../bin/gcgo2
 
+# naive iterative matrix mult
+iterativematrix1:
+	cd iterativematrix1 && $(GO) build -o ../bin/iterativematrix1
+
 %.cprof: 
 	$(MAKE) $*
 	$(BIN)/$* -cpuprofile=$(PROF)/$@
@@ -66,4 +70,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo clean
+.PHONY: all havlakgo revcmpgo iterativematrix1 clean
