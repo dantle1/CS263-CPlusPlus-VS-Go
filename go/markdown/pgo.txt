@@ -1,0 +1,25 @@
+goos: linux
+goarch: arm64
+pkg: example.com/markdown/load
+BenchmarkLoad-8   	    7392	    149200 ns/op
+BenchmarkLoad-8   	    7161	    154144 ns/op
+BenchmarkLoad-8   	    8278	    141091 ns/op
+BenchmarkLoad-8   	    7990	    142499 ns/op
+BenchmarkLoad-8   	    8383	    143056 ns/op
+BenchmarkLoad-8   	    9212	    146262 ns/op
+BenchmarkLoad-8   	    8430	    154685 ns/op
+BenchmarkLoad-8   	    8150	    146553 ns/op
+BenchmarkLoad-8   	    7554	    150144 ns/op
+BenchmarkLoad-8   	    8451	    136518 ns/op
+BenchmarkLoad-8   	    9696	    131853 ns/op
+BenchmarkLoad-8   	    9662	    131389 ns/op
+BenchmarkLoad-8   	    9854	    132071 ns/op
+BenchmarkLoad-8   	    7741	    131738 ns/op
+BenchmarkLoad-8   	    9907	    132673 ns/op
+BenchmarkLoad-8   	    8408	    132007 ns/op
+BenchmarkLoad-8   	    8342	    134665 ns/op
+BenchmarkLoad-8   	    9678	    132073 ns/op
+BenchmarkLoad-8   	    9099	    132046 ns/op
+BenchmarkLoad-8   	    9117	    133255 ns/op
+PASS
+ok  	example.com/markdown/load	25.275s
