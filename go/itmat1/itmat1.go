@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"flag"
-	"fmt"
+	// "fmt"
 	"log"
 	"os"
 	"runtime/pprof"
@@ -87,11 +87,11 @@ func main() {
 		defer pprof.StopCPUProfile()
 	}
 
-	C := multiplyMatrices(A, B)
+	_ = multiplyMatrices(A, B)
 
-	for r := range C {
-		for _, val := range C[r] {
-			fmt.Printf("%d\n", int(val))
-		}
-	}
+	// for r := range C {
+	// 	for _, val := range C[r] {
+	// 		fmt.Printf("%d\n", int(val))
+	// 	}
+	// }
 }
