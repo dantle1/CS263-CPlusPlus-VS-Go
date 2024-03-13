@@ -5,7 +5,7 @@ PROF=./prof
 # GO=go1.18
 GO=go1.22.0
 
-PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 graph 
+PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 graph huffman 
 
 all: $(PROG)
 
@@ -65,6 +65,9 @@ recmatpgo:
 graph:
 	cd graph && $(GO) build -o ../bin/graph 
 
+huffman:
+	cd huffman && $(GO) build -o ../bin/huffman 
+
 %.cprof: 
 	$(MAKE) $*
 	$(BIN)/$* -cpuprofile=$(PROF)/$@
@@ -93,4 +96,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo graph clean
+.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo graph huffman clean
