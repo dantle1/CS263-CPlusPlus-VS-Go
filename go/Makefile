@@ -5,7 +5,7 @@ GO=go # 1.19
 # GO=go1.18
 #GO=go1.22.0
 
-PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1
+PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2
 
 all: $(PROG)
 
@@ -45,6 +45,23 @@ itmat1:
 recmat1:
 	cd recmat1 && $(GO) build -o ../bin/recmat1 
 
+recmat2:
+	cd recmat2 && $(GO) build -o ../bin/recmat2 
+
+itmatpgo:
+	@if [ "$(GO)" != "go1.22.0" ]; then \
+			echo "Error: change Go compiler to version 1.22.0"; \
+			exit 1; \
+	fi
+	cd itmat1 && $(GO) build -pgo=auto -o ../bin/itmatpgo
+
+recmatpgo:
+	@if [ "$(GO)" != "go1.22.0" ]; then \
+			echo "Error: change Go compiler to version 1.22.0"; \
+			exit 1; \
+	fi
+	cd recmat1 && $(GO) build -pgo=auto -o ../bin/recmatpgo
+
 %.cprof: 
 	$(MAKE) $*
 	$(BIN)/$* -cpuprofile=$(PROF)/$@
@@ -73,4 +90,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo itmat1 recmat1 clean
+.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo clean

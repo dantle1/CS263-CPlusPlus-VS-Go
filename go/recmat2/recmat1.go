@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"flag"
-	// "fmt"
 	"log"
 	"os"
 	"runtime/pprof"
@@ -42,6 +41,28 @@ func sub(mat1 [][]float64, mat2 [][]float64) [][]float64 {
 			result[i][j] = mat1[i][j] - mat2[i][j]
 		}
 	}
+	return result
+}
+
+// iteratively multiply submatrices
+func iterMult(mat1, mat2 [][]float64) [][]float64 {
+	rows1 := len(mat1)
+	cols1 := len(mat1[0])
+	cols2 := len(mat2[0])
+
+	result := make([][]float64, rows1)
+	for i := range result {
+		result[i] = make([]float64, cols2)
+	}
+
+	for i := 0; i < rows1; i++ {
+		for j := 0; j < cols2; j++ {
+			for k := 0; k < cols1; k++ {
+				result[i][j] += mat1[i][k] * mat2[k][j]
+			}
+		}
+	}
+
 	return result
 }
 
@@ -108,13 +129,13 @@ func multiplyMatrices(mat1, mat2 [][]float64) [][]float64 {
 	}
 
 	// Recursive steps for multiplication
-	P1 := multiplyMatrices(A11, sub(B12, B22))
-	P2 := multiplyMatrices(add(A11, A12), B22)
-	P3 := multiplyMatrices(add(A21, A22), B11)
-	P4 := multiplyMatrices(A22, sub(B21, B11))
-	P5 := multiplyMatrices(add(A11, A22), add(B11, B22))
-	P6 := multiplyMatrices(sub(A12, A22), add(B21, B22))
-	P7 := multiplyMatrices(sub(A11, A21), add(B11, B12))
+	P1 := iterMult(A11, sub(B12, B22))
+	P2 := iterMult(add(A11, A12), B22)
+	P3 := iterMult(add(A21, A22), B11)
+	P4 := iterMult(A22, sub(B21, B11))
+	P5 := iterMult(add(A11, A22), add(B11, B22))
+	P6 := iterMult(sub(A12, A22), add(B21, B22))
+	P7 := iterMult(sub(A11, A21), add(B11, B12))
 
 	// Computing result quadrants
 	C11 = add(sub(add(P5, P4), P2), P6)
