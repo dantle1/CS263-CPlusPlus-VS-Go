@@ -1,9 +1,9 @@
 BIN=./bin
 PROF=./prof
 # This is how we change the Go compiler we are using
-GO=go # 1.19
+# GO=go # 1.19
 # GO=go1.18
-#GO=go1.22.0
+GO=go1.22.0
 
 PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2
 
@@ -48,6 +48,14 @@ recmat1:
 recmat2:
 	cd recmat2 && $(GO) build -o ../bin/recmat2 
 
+# quicksort and mergesort 
+quicksort1:
+	cd quicksort1 && $(GO) build -o ../bin/quicksort1
+
+mergesort1:
+	cd mergesort1 && $(GO) build -o ../bin/mergesort1
+
+
 itmatpgo:
 	@if [ "$(GO)" != "go1.22.0" ]; then \
 			echo "Error: change Go compiler to version 1.22.0"; \
@@ -90,4 +98,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo clean
+.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo quicksort1 mergesort1 clean
