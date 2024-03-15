@@ -4,16 +4,16 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/huffman1/huffman"
 	"log"
 	"os"
 	"runtime/pprof"
-	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/huffman/huffman"
 )
 
 var (
-	memprofile  = flag.String("memprofile", "", "write memory profile to this file")
-	cpuprofile  = flag.String("cpuprofile", "", "write cpu profile to this file")
-	infile 		= flag.String("infile", "../data/string/string.in", "Input file")
+	memprofile = flag.String("memprofile", "", "write memory profile to this file")
+	cpuprofile = flag.String("cpuprofile", "", "write cpu profile to this file")
+	infile     = flag.String("infile", "../data/string/string.in", "Input file")
 )
 
 func main() {
@@ -25,10 +25,12 @@ func main() {
 	scanner := bufio.NewScanner(file)
 
 	message := ""
-	
+
 	for scanner.Scan() {
 		message += scanner.Text()
 	}
+
+	tree, _ := huffman.HuffTree(huffman.SymbolCountOrd(message))
 
 	if *cpuprofile != "" {
 		f, err := os.Create(*cpuprofile)
@@ -38,8 +40,6 @@ func main() {
 		pprof.StartCPUProfile(f)
 		defer pprof.StopCPUProfile()
 	}
-
-	tree, _ := huffman.HuffTree(huffman.SymbolCountOrd(message))
 	codes := make(map[rune][]bool)
 	huffman.HuffEncoding(tree, nil, codes)
 	messageCoded := huffman.HuffEncode(codes, message)

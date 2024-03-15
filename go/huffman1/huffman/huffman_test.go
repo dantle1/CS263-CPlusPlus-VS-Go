@@ -8,7 +8,7 @@ package huffman_test
 import (
 	"testing"
 
-	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/huffman/huffman"
+	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/huffman1/huffman"
 )
 
 func TestHuffman(t *testing.T) {
