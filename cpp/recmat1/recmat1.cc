@@ -141,13 +141,19 @@ int main() {
         }
     }
 
+    ProfilerStart("prof/recmat1.cprof");
+    clock_t start = clock();
     std::vector<std::vector<double>> result = multiplyMatrices(A, B);
+    clock_t end = clock();
+    ProfilerStop();
 
-    for (auto &row : result) {
-        for (const auto &val : row) {
-            std::cout << val << "\n";
-        }
-    }
+    std::cout<< "Recursive Matrix Multiplication time for " << n << " elements: "<< (float)(end - start)/ CLOCKS_PER_SEC << " "<< std::endl;;
+
+    // for (auto &row : result) {
+    //     for (const auto &val : row) {
+    //         std::cout << val << "\n";
+    //     }
+    // }
 
     f.close();
     
