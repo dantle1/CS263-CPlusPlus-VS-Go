@@ -54,6 +54,8 @@ int main() {
         }
     }
 
+    
+
     ProfilerStart("prof/itmat1.cprof");
     clock_t start = clock();
     std::vector<std::vector<double>> result = multiplyMatrices(A, B);
@@ -61,6 +63,8 @@ int main() {
     ProfilerStop();
 
     std::cout<< "Iterative Matrix Multiplication time for " << n << " elements: "<< (float)(end - start)/ CLOCKS_PER_SEC << " "<< std::endl;;
+
+    ProfilerStop();
 
     // for (auto &row : result) {
     //     for (const auto &val : row) {
