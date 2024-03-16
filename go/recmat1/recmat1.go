@@ -192,6 +192,15 @@ func main() {
 
 	_ = multiplyMatrices(A, B)
 
+	if *memprofile != "" {
+		f, err := os.Create(*memprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pprof.WriteHeapProfile(f)
+		f.Close()
+	}
+
 	// for r := range C {
 	// 	for _, val := range C[r] {
 	// 		fmt.Printf("%d\n", int(val))

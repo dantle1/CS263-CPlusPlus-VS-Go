@@ -54,13 +54,17 @@ int main() {
         }
     }
 
+    ProfilerStart("prof/itmat1.cprof");
+
     std::vector<std::vector<double>> result = multiplyMatrices(A, B);
 
-    for (auto &row : result) {
-        for (const auto &val : row) {
-            std::cout << val << "\n";
-        }
-    }
+    ProfilerStop();
+
+    // for (auto &row : result) {
+    //     for (const auto &val : row) {
+    //         std::cout << val << "\n";
+    //     }
+    // }
 
     f.close();
     
