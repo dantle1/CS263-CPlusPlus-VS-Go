@@ -5,7 +5,7 @@ PROF=./prof
 # GO=go1.18
 GO=go1.22.0
 
-PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 graph huffman1 huffman2 permutation1 permutation2
+PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 graph huffman1 huffman2 permutation1 permutation2 huffman0
 
 all: $(PROG)
 
@@ -65,6 +65,9 @@ recmatpgo:
 graph:
 	cd graph && $(GO) build -o ../bin/graph 
 
+huffman0:
+	cd huffman0 && $(GO) build -o ../bin/huffman0
+
 huffman1:
 	cd huffman1 && $(GO) build -o ../bin/huffman1
 
@@ -105,4 +108,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo graph huffman1 huffman2 permutation1 permutation2 clean
+.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo graph huffman1 huffman2 permutation1 permutation2 huffman0 clean
