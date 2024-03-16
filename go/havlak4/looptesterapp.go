@@ -26,7 +26,7 @@ import (
 	"os"
 	"runtime/pprof"
 
-	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/havlak3/havlakloopfinder"
+	"github.com/dantle1/CS263-CPlusPlus-VS-Go/go/havlak4/havlakloopfinder"
 )
 
 //======================================================
