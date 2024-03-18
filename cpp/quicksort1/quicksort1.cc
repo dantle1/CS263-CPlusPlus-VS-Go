@@ -48,13 +48,15 @@ int main(){
         arr.push_back(num);
     }
     
+    ProfilerStart("prof/quicksort1.cprof");
     clock_t start = clock();
     quickSort(arr, 0, n-1);
     clock_t end = clock();
+    ProfilerStop();
     
-    for (auto &element : arr){
-        cout << element << endl;
-    }
+    // for (auto &element : arr){
+    //     cout << element << endl;
+    // }
 
     //cout<< "Quicksort time for " << n << " elements: "<< (float)(end - start)/ CLOCKS_PER_SEC << " "<<endl;;
     f.close();
