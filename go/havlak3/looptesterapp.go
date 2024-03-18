@@ -126,7 +126,7 @@ func main() {
 			log.Fatal(err)
 		}
 		pprof.WriteHeapProfile(f)
-		defer pprof.StopCPUProfile()
+		f.Close()
 	}
 
 	for i := 0; i < 50; i++ {
