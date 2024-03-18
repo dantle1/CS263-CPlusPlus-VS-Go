@@ -1,4 +1,4 @@
-module github.com/dantle1/CS263-CPlusPlus-VS-Go/go
+module example.com/markdown
 
 go 1.19
 

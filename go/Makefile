@@ -5,7 +5,7 @@ PROF=./prof
 # GO=go1.18
 GO=go1.22.0
 
-PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 graph huffman1 huffman2 permutation1 permutation2 huffman0
+PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 graph huffman1 huffman2 permutation1 permutation2 huffman0  md mdpgo
 
 all: $(PROG)
 
@@ -45,6 +45,16 @@ itmat1:
 recmat1:
 	cd recmat1 && $(GO) build -o ../bin/recmat1 
 
+md:
+	cd markdown && $(GO) build -o ../bin/md 
+
+mdpgo:
+	@if [ "$(GO)" != "go1.22.0" ]; then \
+		echo "Error: change Go compiler to version 1.22.0"; \
+		exit 1; \
+	fi
+	cd markdown && $(GO) build -pgo=auto -o ../bin/mdpgo
+	
 recmat2:
 	cd recmat2 && $(GO) build -o ../bin/recmat2 
 
@@ -108,4 +118,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo graph huffman1 huffman2 permutation1 permutation2 huffman0 clean
+.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo graph huffman1 huffman2 permutation1 permutation2 huffman0 md mdpgo clean
