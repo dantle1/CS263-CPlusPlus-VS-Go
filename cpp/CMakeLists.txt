@@ -107,3 +107,20 @@ set (MERGESORT1_SOURCES
     mergesort1/mergesort1.cc)
 add_executable(mergesort1 ${MERGESORT1_SOURCES})
 cpuprofile(mergesort1)
+
+# prime num
+set (PRIMENUM_SOURCES
+    primenum/primenum.cc)
+add_executable(primenum ${PRIMENUM_SOURCES})
+cpuprofile(primenum)
+
+# fibonacci
+set (ITERFIBONACCI_SOURCES
+    iterfibonacci/iterfibonacci.cc)
+add_executable(iterfibonacci ${ITERFIBONACCI_SOURCES})
+cpuprofile(iterfbionacci)
+
+set (RECFIBONACCI_SOURCES
+    recfibonacci/recfibonacci.cc)
+add_executable(recfibonacci ${RECFIBONACCI_SOURCES})
+cpuprofile(recfibonacci)

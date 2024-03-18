@@ -2,10 +2,11 @@ BIN=./bin
 PROF=./prof
 # This is how we change the Go compiler we are using
 # GO=go # 1.19
+# GO=go1.21.0
 # GO=go1.18
 GO=go1.22.0
 
-PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2
+PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 primenum iterfibonacci recfibonacci quicksort1 mergesort1
 
 all: $(PROG)
 
@@ -45,6 +46,7 @@ itmat1:
 recmat1:
 	cd recmat1 && $(GO) build -o ../bin/recmat1 
 
+# recursive matrix optimization
 recmat2:
 	cd recmat2 && $(GO) build -o ../bin/recmat2 
 
@@ -55,6 +57,21 @@ quicksort1:
 mergesort1:
 	cd mergesort1 && $(GO) build -o ../bin/mergesort1
 
+# primenum
+primenum:
+	cd primenum && $(GO) build -o ../bin/primenum
+
+# fibonacci
+iterfibonacci:
+	cd iterfibonacci && $(GO) build -o ../bin/iterfibonacci
+
+recfibonacci:
+	cd recfibonacci && $(GO) build -o ../bin/recfibonacci
+
+# profiler guide optimization
+
+gcpgo:
+	cd gc1 && $(GO) build -pgo=auto -o ../bin/gcpgo
 
 itmatpgo:
 	@if [ "$(GO)" != "go1.22.0" ]; then \
@@ -69,6 +86,13 @@ recmatpgo:
 			exit 1; \
 	fi
 	cd recmat1 && $(GO) build -pgo=auto -o ../bin/recmatpgo
+
+recmat2pgo:
+	@if [ "$(GO)" != "go1.22.0" ]; then \
+			echo "Error: change Go compiler to version 1.22.0"; \
+			exit 1; \
+	fi
+	cd recmat2 && $(GO) build -pgo=auto -o ../bin/recmat2pgo
 
 %.cprof: 
 	$(MAKE) $*
@@ -98,4 +122,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo quicksort1 mergesort1 clean
+.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo quicksort1 mergesort1 primenum iterfibonacci recfibonacci clean
