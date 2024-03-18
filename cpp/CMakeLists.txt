@@ -118,7 +118,7 @@ cpuprofile(primenum)
 set (ITERFIBONACCI_SOURCES
     iterfibonacci/iterfibonacci.cc)
 add_executable(iterfibonacci ${ITERFIBONACCI_SOURCES})
-cpuprofile(iterfbionacci)
+cpuprofile(iterfibonacci)
 
 set (RECFIBONACCI_SOURCES
     recfibonacci/recfibonacci.cc)
