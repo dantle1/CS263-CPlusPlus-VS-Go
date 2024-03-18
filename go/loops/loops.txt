@@ -1,0 +1,45 @@
+goos: linux
+goarch: arm64
+pkg: github.com/dantle1/CS263-CPlusPlus-VS-Go/go/loops
+Benchmark_f1-8   	 3678110	       331.2 ns/op
+Benchmark_f1-8   	 3544918	       366.8 ns/op
+Benchmark_f1-8   	 3673424	       326.1 ns/op
+Benchmark_f1-8   	 3686724	       339.8 ns/op
+Benchmark_f1-8   	 3673441	       325.7 ns/op
+Benchmark_f1-8   	 3671971	       331.3 ns/op
+Benchmark_f1-8   	 3656740	       324.9 ns/op
+Benchmark_f1-8   	 3688712	       327.3 ns/op
+Benchmark_f1-8   	 3666676	       339.8 ns/op
+Benchmark_f1-8   	 3649660	       335.5 ns/op
+Benchmark_f1-8   	 3653952	       325.7 ns/op
+Benchmark_f1-8   	 3689797	       325.2 ns/op
+Benchmark_f1-8   	 3692352	       325.9 ns/op
+Benchmark_f1-8   	 3691122	       325.3 ns/op
+Benchmark_f1-8   	 3667228	       326.0 ns/op
+Benchmark_f1-8   	 3688711	       325.7 ns/op
+Benchmark_f1-8   	 3687468	       331.4 ns/op
+Benchmark_f1-8   	 3326383	       326.0 ns/op
+Benchmark_f1-8   	 3659707	       324.4 ns/op
+Benchmark_f1-8   	 3673093	       326.3 ns/op
+Benchmark_f2-8   	 3666745	       327.4 ns/op
+Benchmark_f2-8   	 3654814	       324.5 ns/op
+Benchmark_f2-8   	 3640172	       325.3 ns/op
+Benchmark_f2-8   	 3655700	       325.2 ns/op
+Benchmark_f2-8   	 3691935	       324.8 ns/op
+Benchmark_f2-8   	 3692734	       325.0 ns/op
+Benchmark_f2-8   	 3650988	       325.8 ns/op
+Benchmark_f2-8   	 3663777	       326.5 ns/op
+Benchmark_f2-8   	 3692460	       326.8 ns/op
+Benchmark_f2-8   	 3685563	       325.1 ns/op
+Benchmark_f2-8   	 3665968	       324.6 ns/op
+Benchmark_f2-8   	 3693421	       324.9 ns/op
+Benchmark_f2-8   	 3691650	       325.8 ns/op
+Benchmark_f2-8   	 3695022	       326.0 ns/op
+Benchmark_f2-8   	 3692187	       327.5 ns/op
+Benchmark_f2-8   	 3674564	       325.0 ns/op
+Benchmark_f2-8   	 3667887	       324.7 ns/op
+Benchmark_f2-8   	 3692637	       325.9 ns/op
+Benchmark_f2-8   	 3664344	       331.6 ns/op
+Benchmark_f2-8   	 3690954	       336.4 ns/op
+PASS
+ok  	github.com/dantle1/CS263-CPlusPlus-VS-Go/go/loops	62.500s
