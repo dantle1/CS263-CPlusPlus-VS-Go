@@ -89,9 +89,38 @@ set (ITMAT1_SOURCES
 add_executable(itmat1 ${ITMAT1_SOURCES})
 cpuprofile(itmat1)
 
-# For recursibe matrix multiplication 
+# For recursive matrix multiplication 
 set (RECMAT1_SOURCES
     recmat1/recmat1.cc
 )
 add_executable(recmat1 ${RECMAT1_SOURCES})
 cpuprofile(recmat1)
+
+# quick sort
+set (QUICKSORT1_SOURCES
+    quicksort1/quicksort1.cc)
+add_executable(quicksort1 ${QUICKSORT1_SOURCES})
+cpuprofile(quicksort1)
+
+# merge sort
+set (MERGESORT1_SOURCES
+    mergesort1/mergesort1.cc)
+add_executable(mergesort1 ${MERGESORT1_SOURCES})
+cpuprofile(mergesort1)
+
+# prime num
+set (PRIMENUM_SOURCES
+    primenum/primenum.cc)
+add_executable(primenum ${PRIMENUM_SOURCES})
+cpuprofile(primenum)
+
+# fibonacci
+set (ITERFIBONACCI_SOURCES
+    iterfibonacci/iterfibonacci.cc)
+add_executable(iterfibonacci ${ITERFIBONACCI_SOURCES})
+cpuprofile(iterfibonacci)
+
+set (RECFIBONACCI_SOURCES
+    recfibonacci/recfibonacci.cc)
+add_executable(recfibonacci ${RECFIBONACCI_SOURCES})
+cpuprofile(recfibonacci)
