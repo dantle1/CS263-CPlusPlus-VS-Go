@@ -1,11 +1,11 @@
 BIN=./bin
 PROF=./prof
 # This is how we change the Go compiler we are using
-GO=go # 1.19
+# GO=go # 1.19
 # GO=go1.18
-# GO=go1.22.0
+GO=go1.22.0
 
-PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 graph huffman1 huffman2 permutation1 permutation2 huffman0 loops
+PROG=havlakgo1 havlakgo2 havlakgo3 havlakgo4 revcmpgo gcgo1 gcgo2 recmat1 itmat1 recmatpgo itmatpgo recmat2 graph huffman1 huffman2 permutation1 permutation2 huffman0
 
 all: $(PROG)
 
@@ -80,9 +80,6 @@ permutation1:
 permutation2:
 	cd permutation2 && $(GO) build -o ../bin/permutation2
 
-loops:
-	cd loops && $(GO) build -o ../bin/loops
-
 %.cprof: 
 	$(MAKE) $*
 	$(BIN)/$* -cpuprofile=$(PROF)/$@
@@ -111,4 +108,4 @@ clean:
 clean-prof:
 	rm -f $(PROF)/*
 
-.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo graph huffman1 huffman2 permutation1 permutation2 huffman0 loops clean
+.PHONY: all havlakgo revcmpgo itmat1 recmat1 recmat2 recmatpgo itmatpgo graph huffman1 huffman2 permutation1 permutation2 huffman0 clean
